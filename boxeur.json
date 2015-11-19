@@ -1,0 +1,22 @@
+{
+    "boxers" :
+    {
+        "id": 1,
+        "fname" : "Mederic",
+        "name" : "Dulondel",
+        "birthdate" : "1992-08-09",
+        "height" : 170,
+        "weight" : 65,
+        "category" : "lightweight",
+        "fights" :
+        {
+            "number" : 17,
+            "details" : {
+                "victory" : 10,
+                "ko" : 5,
+                "defeat" : 5,
+                "draw" : 2,
+            }
+        }
+    }
+}
