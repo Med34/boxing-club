@@ -1,0 +1,19 @@
+{
+  "name": "boxing-club",
+  "version": "1.0.0",
+  "description": "Mini projet de presentation des donnees du web",
+  "author": "Mederic DULONDEL <m.dulondel@gmail.com>",
+  "contributors": [{
+    "name": "Thomas VICARIO"
+  }],
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Med34/boxing-club.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "fs": "0.0.2"
+  }
+}
