@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Mini projet de presentation des donnees du web",
   "author": "Mederic DULONDEL <m.dulondel@gmail.com>",
-  "contributors": [{
-    "name": "Thomas VICARIO"
-  }],
+  "contributors": [
+    {
+      "name": "Thomas VICARIO"
+    }
+  ],
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -13,6 +15,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "angular": "^1.4.8",
+    "angular-route": "^1.4.8",
     "express": "^4.13.3",
     "fs": "0.0.2"
   }
