@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ngRoute']);
+var app = angular.module('bclub', ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
 
@@ -16,11 +16,3 @@ app.config(['$routeProvider', function($routeProvider) {
 		});
 
 }]);
-
-app.controller('HomeController', function($scope) {
-	console.log('HomeController');
-});
-
-app.controller('CheminController', function($scope) {
-	console.log('CheminController');
-});
