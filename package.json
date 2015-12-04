@@ -1,14 +1,10 @@
 {
   "name": "boxing-club",
   "version": "1.0.0",
-  "description": "Mini projet de presentation des donnees du web",
+  "description": "Simple test for Angulars",
   "author": "Mederic DULONDEL <m.dulondel@gmail.com>",
-  "contributors": [
-    {
-      "name": "Thomas VICARIO"
-    }
-  ],
-  "main": "index.js",
+	"main": "serveur_club.js",
+  "contributors": [{"name": "Thomas VICARIO"}],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Med34/boxing-club.git"
@@ -19,8 +15,5 @@
     "angular-route": "^1.4.8",
     "express": "^4.13.3",
     "fs": "0.0.2"
-  },
-  "devDependencies": {
-    "supervisor": "^0.9.1"
   }
 }
