@@ -1,0 +1,23 @@
+[
+  {
+    'repeat:5': {
+      index: '{{index()}}',
+      coord: {
+        longitude: '{{floating(-90.000001, 90)}}',
+        lattitute: '{{floating(-180.000001, 180)}}'
+      },
+      boxers :
+      [
+        {
+            'repeat:10': {
+                id: '{{index()}}',
+                fname: '{{firstName()}}',
+                name: '{{surname()}}'
+            }
+        }
+      ]
+    }
+  }
+]
+
+// Use: http://beta.json-generator.com
