@@ -1,49 +1,38 @@
 [
-  '{{repeat(1, 2)}}',
+  '{{repeat(15, 20)}}',
   {
-    index: '{{index()}}',
+    id: '{{index()}}',
     clubName: '{{company()}}',
-    boxers :
-    [
-      '{{repeat(4, 8)}}',
-      {
-        id: '{{index()}}',
-        fname: '{{firstName()}}',
-        name: '{{surname()}}',
-        birthdate: '{{date(new Date(1995, 0, 1), new Date(1975, 0, 1), "YYYY-MM-dd")}}',
-        height: '{{integer(160, 210)}}',
-        weight: function() {
-          var min = this.height - 100 - 10;
-          var max = this.height - 100 + 15;
-          return Math.floor(Math.random() * (max - min + 1)) + min;
-        },
-        category: function() {
-          var a_category = "lightweight";
-          if(this.weight > 70 && this.weight <= 80) {
-            a_category = "middleweight";
-          }
-          else if (this.weight > 80) {
-            a_category = "heavyweight";
-          }
-          return a_category;
-        },
-        fights : {
-          details: {
-            victory: '{{integer(0, 50)}}',
-            defeat: '{{integer(0, 50)}}',
-            draw: '{{integer(0, 15)}}',
-            ko: function() {
-              return Math.floor(Math.random() * (this.victory - 0 + 1)) + 0;
-            }
-          },
-          number: function() {
-            return this.details.victory + this.details.defeat + this.details.draw;
-          }
-        }
+    clubCity: '{{city()}}',
+    fname: '{{firstName()}}',
+    name: '{{surname()}}',
+    birthdate: '{{date(new Date(1995, 0, 1), new Date(1975, 0, 1), "YYYY-MM-dd")}}',
+    height: '{{integer(160, 210)}}',
+    weight: function() {
+      var min = this.height - 100 - 10;
+      var max = this.height - 100 + 15;
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    category: function() {
+      var a_category = "lightweight";
+      if(this.weight > 70 && this.weight <= 80) {
+        a_category = "middleweight";
       }
-    ]
+      else if (this.weight > 80) {
+        a_category = "heavyweight";
+      }
+      return a_category;
+    },
+    victory: '{{integer(0, 50)}}',
+    defeat: '{{integer(0, 50)}}',
+    draw: '{{integer(0, 15)}}',
+    ko: function() {
+      return Math.floor(Math.random() * (this.victory - 0 + 1)) + 0;
+    },
+    number: function() {
+        return this.victory + this.defeat + this.draw;
+    }
   }
 ]
 
-
-// http://www.json-generator.com/
+// Use www.json-generator.com
