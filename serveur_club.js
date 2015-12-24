@@ -26,7 +26,7 @@ function map(json) {
     return JSON.stringify(values);
 }
 
-app.get("/listeMembres", function (req, res) {
+app.get("/findMember", function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Content-Type", "application/json");
     var chaineListeMembres = fs.readFileSync("public/datas/boxers.min.json", "UTF-8");

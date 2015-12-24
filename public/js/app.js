@@ -5,8 +5,8 @@ app.controller("HomeController", function ($scope) {
     console.log("HomeController");
 });
 
-app.controller("ListeMembresController", function ($scope, $http) {
-    $http.get("http://localhost:8888/listeMembres").then(function(response){
+app.controller("FindMemberController", function ($scope, $http) {
+    $http.get("http://localhost:8888/findMember").then(function (response) {
         $scope.membres = response.data;
     });
 });
@@ -16,11 +16,11 @@ app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when('/home', {
             controller: 'HomeController',
-            templateUrl: 'templates/accueil.html'
+            templateUrl: 'templates/home.html'
         })
-        .when('/listeMembres', {
-            templateUrl: 'templates/listeMembres.html',
-            controller: 'ListeMembresController'
+        .when('/findMember', {
+            controller: 'FindMemberController',
+            templateUrl: 'templates/findMember.html'
         })
         .otherwise({
             redirectTo: '/home'
