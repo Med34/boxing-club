@@ -30,9 +30,10 @@ app.get("/listeMembres", function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Content-Type", "application/json");
     var chaineListeMembres = fs.readFileSync("public/datas/boxers.min.json", "UTF-8");
-    var listeMembres = JSON.parse(chaineListeMembres);
-    var json = map(listeMembres);
-    res.end(json);
+    var json = JSON.parse(chaineListeMembres);
+    var listeMembres = JSON.stringify(json);
+    //var json = map(listeMembres);
+    res.end(listeMembres);
 });
 
 // App listening
