@@ -7,8 +7,17 @@ app.controller("HomeController", function ($scope) {
 
 app.controller("FindMemberController", function ($scope, $http) {
     $http.get("http://localhost:8888/findMember").then(function (response) {
-        $scope.membres = response.data;
+        $scope.members = response.data;
     });
+
+    // Stocke l'utilisateur.
+    $scope.user = {};
+    $scope.find = function (user) {
+        console.log(user);
+    }
+    $scope.reset = function () {
+        $scope.user = {};
+    }
 });
 
 app.config(['$routeProvider', function ($routeProvider) {

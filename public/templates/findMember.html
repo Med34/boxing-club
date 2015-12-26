@@ -1,7 +1,8 @@
-<div id="toto">
-    <ul>
-        <li ng-repeat="membre in membres">
-            <a href="#">{{membre.fname}}</a>
-        </li>
-    </ul>
-</div>
+<form ng-controller="FindMemberController">
+    <div ng-repeat="(attribute, value) in members">
+        <label for="{{attribute}}">{{attribute}}</label>
+        <select ng-options="val for val in value" ng-model="user[attribute]"></select>
+    </div>
+    <input type="button" ng-click="reset()" value="Reset"/>
+    <input type="submit" ng-click="find(user)" value="Find"/>
+</form>
