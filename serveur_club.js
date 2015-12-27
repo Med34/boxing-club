@@ -2,12 +2,13 @@
 var express = require("express");
 var fs = require("fs");
 var app = express();
+var JSON_PATH_BD = "public/datas/boxers.min.json";
 
 /*
  * Cherche toutes les cles du document json et toutes les valeurs associees.
  */
 function map() {
-    var json = JSON.parse(fs.readFileSync("public/datas/boxers.min.json", "UTF-8"));
+    var json = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
     var values = {};
     for(var i = 0; i < json.length; i++) {
         var properties = Object.keys(json[i]);
@@ -35,7 +36,7 @@ function map() {
  */
 function find(paramJSON) {
     var listePersonnes = [];
-    var listeMembres = JSON.parse(fs.readFileSync("public/datas/boxers.min.json", "UTF-8"));
+    var listeMembres = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
     for(var i = 0; i < listeMembres.length; i++) {
         // Compte le nombre de conditions respectees.
         var conditionsCompteur = 0;
