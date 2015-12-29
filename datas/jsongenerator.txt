@@ -2,12 +2,11 @@
   '{{repeat(15, 20)}}',
   {
     id: '{{index()}}',
-    clubName: '{{company()}}',
-    clubCity: '{{city()}}',
+    clubName: '{{random("Boxe2000", "MonsterClub", "KOTeam", "FightClub")}}',
     fname: '{{firstName()}}',
     name: '{{surname()}}',
     birthdate: '{{date(new Date(1995, 0, 1), new Date(1975, 0, 1), "YYYY-MM-dd")}}',
-    height: '{{integer(160, 210)}}',
+    height: '{{integer(170, 185)}}',
     weight: function() {
       var min = this.height - 100 - 10;
       var max = this.height - 100 + 15;
@@ -23,9 +22,9 @@
       }
       return a_category;
     },
-    victory: '{{integer(0, 50)}}',
-    defeat: '{{integer(0, 50)}}',
-    draw: '{{integer(0, 15)}}',
+    victory: '{{integer(0, 5)}}',
+    defeat: '{{integer(0, 5)}}',
+    draw: '{{integer(0, 5)}}',
     ko: function() {
       return Math.floor(Math.random() * (this.victory - 0 + 1)) + 0;
     },

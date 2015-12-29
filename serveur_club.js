@@ -2,7 +2,7 @@
 var express = require("express");
 var fs = require("fs");
 var app = express();
-var JSON_PATH_BD = "public/datas/boxers.min.json";
+var JSON_PATH_BD = "datas/boxers.min.json";
 
 /*
  * Cherche toutes les cles du document json et toutes les valeurs associees.
