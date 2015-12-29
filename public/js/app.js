@@ -21,6 +21,7 @@ app.controller("FindMemberController", function ($scope, $http) {
     }
     $scope.reset = function () {
         $scope.user = {};
+        $scope.members = null;
     }
 });
 
