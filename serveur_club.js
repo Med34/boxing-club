@@ -1,8 +1,38 @@
-// Configuration.
+// Express.
 var express = require("express");
-var fs = require("fs");
 var app = express();
+
+// Locale DB.
+var fs = require("fs");
 var JSON_PATH_BD = "datas/boxers.min.json";
+var json = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
+
+// DB distante.
+var MongoClient = require("mongodb").MongoClient;
+var ObjectId = require("mongodb").MongoClient;
+var urlMongoDB = "mongodb://localhost:27017/BoxingClub";
+var assert = require("assert");
+
+/*
+ * Insertion des donnees locales sur la base de donnees MongoDB
+ */
+var insertMembers = function (db, callback) {
+    db.collection('members').insert(json, function (err, result) {
+        assert.equal(err, null);
+        console.log("Insert datas");
+        callback(result);
+    });
+};
+
+/*
+ * Connexion + insertions des donnees
+ */
+MongoClient.connect(urlMongoDB, function (err, db) {
+    assert.equal(null, err);
+    insertMembers(db, function(){
+        db.close();
+    });
+});
 
 /*
  * Cherche toutes les cles du document json et toutes les valeurs associees.
