@@ -1,3 +1,3 @@
 # Dependency directory
 node_modules
-datas/mongodb/
+server/datas/mongodb

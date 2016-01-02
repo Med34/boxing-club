@@ -4,7 +4,7 @@ var app = express();
 
 // Locale DB.
 var fs = require("fs");
-var JSON_PATH_BD = "datas/boxers.min.json";
+var JSON_PATH_BD = "server/datas/boxers.min.json";
 var json = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
 
 // DB distante.
