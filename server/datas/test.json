@@ -1,0 +1,27 @@
+[
+  {
+    "id": 0,
+    "integer": 7,
+    "mail": "jeaninesantana@rodeocean.com"
+  },
+  {
+    "id": 1,
+    "integer": 1,
+    "mail": "dianepayne@bedlam.com"
+  },
+  {
+    "id": 2,
+    "integer": 4,
+    "mail": "joynerdaniels@zipak.com"
+  },
+  {
+    "id": 3,
+    "integer": 10,
+    "mail": "medinachambers@songbird.com"
+  },
+  {
+    "id": 4,
+    "integer": 4,
+    "mail": "lancasterarnold@medalert.com"
+  }
+]
