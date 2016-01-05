@@ -4,6 +4,7 @@ var app = express();
 var serverFunctions = require("./serverFunctions");
 var sFunc = new serverFunctions();
 var database = require("./database");
+var config = require("./config");
 
 database.connect(function(){
     // App listening.
@@ -31,6 +32,6 @@ database.connect(function(){
     app.get("/listMembers/", function (req, res) {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Content-Type", "application/json");
-        //res.end(sFunc.find(bddJSON, req.query));
+        res.end(sFunc.findMongo(config.mongodb.collectionMembers, req.query));
     })
 });

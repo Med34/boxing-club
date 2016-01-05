@@ -28,10 +28,10 @@ var serverFunctions = function() {
     }
 
     /*
-     * Recherche dans le fichier json tous les elements correspondants aux
+     * Recherche dans le fichier json local tous les elements correspondants aux
      * criteres de recherche.
      */
-    this.find = function(json, paramJSON) {
+    this.findLocal = function(json, paramJSON) {
         var listePersonnes = [];
         for(var i = 0; i < json.length; i++) {
             // Compte le nombre de conditions respectees.
@@ -50,6 +50,15 @@ var serverFunctions = function() {
         }
 
         return JSON.stringify(listePersonnes);
+    }
+
+    /*
+     * Recherche dans la collection de la base mongodb tous les elements
+     * correspondants aux criteres de recherche.
+     */
+    this.findMongo = function(collectionMembers, paramJSON){
+        var listePersonnes = [];
+        console.log(collectionMembers);
     }
 }
 

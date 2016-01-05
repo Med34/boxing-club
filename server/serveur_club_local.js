@@ -3,11 +3,11 @@ var express = require("express");
 var app = express();
 var serverFunctions = require("./serverFunctions");
 var sFunc = new serverFunctions();
+var config = require("./config");
 
 // Locale DB.
 var fs = require("fs");
-var JSON_PATH_BD = "datas/boxers.min.json";
-var json = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
+var json = JSON.parse(fs.readFileSync(config.local.json, "UTF-8"));
 
 /*
  * Renvoie la liste des criteres de recherche ainsi que toutes les valeurs
@@ -28,7 +28,7 @@ app.get("/findMember", function (req, res) {
 app.get("/listMembers/", function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Content-Type", "application/json");
-    res.end(sFunc.find(json, req.query));
+    res.end(sFunc.findLocal(json, req.query));
 })
 
 // App listening.
