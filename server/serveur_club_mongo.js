@@ -1,9 +1,9 @@
 // Chargement des modules.
 var express = require("express");
 var app = express();
-var serverFunctions = require("./server/serverFunctions");
+var serverFunctions = require("./serverFunctions");
 var sFunc = new serverFunctions();
-var database = require("./server/database");
+var database = require("./database");
 
 database.connect(function(){
     // App listening.

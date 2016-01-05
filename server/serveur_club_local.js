@@ -1,12 +1,12 @@
 // Chargement des modules.
 var express = require("express");
 var app = express();
-var serverFunctions = require("./server/serverFunctions");
+var serverFunctions = require("./serverFunctions");
 var sFunc = new serverFunctions();
 
 // Locale DB.
 var fs = require("fs");
-var JSON_PATH_BD = "server/datas/boxers.min.json";
+var JSON_PATH_BD = "datas/boxers.min.json";
 var json = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
 
 /*
