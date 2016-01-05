@@ -1,23 +1,23 @@
 // Chargement des modules.
 var express = require("express");
-var serverFunctions = require("./server/serverFunctions");
-var bddFunctions = require("./server/bddFunctions");
-
-// Creation des instances.
 var app = express();
-var bddFunc = new bddFunctions();
+var serverFunctions = require("./server/serverFunctions");
 var sFunc = new serverFunctions();
-var bddJSON = bddFunc.getJSON();
+
+// Locale DB.
+var fs = require("fs");
+var JSON_PATH_BD = "server/datas/boxers.min.json";
+var json = JSON.parse(fs.readFileSync(JSON_PATH_BD, "UTF-8"));
 
 /*
  * Renvoie la liste des criteres de recherche ainsi que toutes les valeurs
  * possibles.
- * Generation d'un formulaire de recherche dynamique.
+ * Generation d'un formulairede recherche dynamique.
  */
 app.get("/findMember", function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Content-Type", "application/json");
-    res.end(sFunc.map(bddJSON));
+    res.end(sFunc.map(json));
 });
 
 /*
@@ -28,7 +28,7 @@ app.get("/findMember", function (req, res) {
 app.get("/listMembers/", function (req, res) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Content-Type", "application/json");
-    res.end(sFunc.find(bddJSON, req.query));
+    res.end(sFunc.find(json, req.query));
 })
 
 // App listening.
