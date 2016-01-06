@@ -21,3 +21,7 @@ angular.module('bclub').controller("FindMemberController", function ($scope, $ht
         $scope.members = null;
     }
 });
+
+angular.module('bclub').controller("LocalizeMemberController", function($scope, $http){
+    
+});

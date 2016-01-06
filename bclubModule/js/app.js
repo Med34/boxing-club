@@ -11,6 +11,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'FindMemberController',
             templateUrl: 'templates/findMember.html'
         })
+        .when('/localizeMembers', {
+            controller: 'LocalizeMemberController',
+            templateUrl: 'templates/localizeMembers.html'
+        })
         .otherwise({
             redirectTo: '/home'
         });

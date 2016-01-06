@@ -28,7 +28,6 @@ exports.connect = function(callback) {
  * renseigne. Sinon recupere ceux correspondant aux criteres.
  */
 exports.findAllMembers = function(callback, paramJSON) {
-    console.log(paramJSON);
     paramJSON = (typeof paramJSON === 'undefined') ? {} : paramJSON;
     db.collection(config.mongodb.collectionMembers).find(paramJSON, {_id:0}, function(err, cursor){
         cursor.sort({"id":1}).toArray(function(err, items) {
