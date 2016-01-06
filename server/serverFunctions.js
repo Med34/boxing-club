@@ -53,12 +53,27 @@ var serverFunctions = function() {
     }
 
     /*
-     * Recherche dans la collection de la base mongodb tous les elements
-     * correspondants aux criteres de recherche.
+     * Transforme les parametres de recherche en objet json valide pour mongodb
      */
-    this.findMongo = function(collectionMembers, paramJSON){
-        var listePersonnes = [];
-        console.log(collectionMembers);
+    this.transformQueryParam = function(queryParam){
+        var validJSON = {};
+        for (var query in queryParam) {
+            if (queryParam.hasOwnProperty(query)) {
+                /*
+                 * Toutes les queries sont sous forme chaine de caracteres,
+                 * (chiffres compris). La conversion en nombre est obligatoire
+                 * pour avoir un objet json valide pour la fonction find de
+                 * mongodb.
+                 */
+                if (!isNaN(queryParam[query])) {
+                    validJSON[query] = +queryParam[query];
+                } else {
+                    validJSON[query] = queryParam[query];
+                }
+            }
+        }
+
+        return validJSON;
     }
 }
 

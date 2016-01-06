@@ -32,6 +32,8 @@ database.connect(function(){
     app.get("/listMembers/", function (req, res) {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Content-Type", "application/json");
-        res.end(sFunc.findMongo(config.mongodb.collectionMembers, req.query));
+        database.findAllMembers(function(json){
+            res.json(json);
+        }, sFunc.transformQueryParam(req.query));
     })
 });

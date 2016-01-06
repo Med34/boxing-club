@@ -24,12 +24,15 @@ exports.connect = function(callback) {
 };
 
 /*
- * Recupere tous les membres de la collection Mongodb.
+ * Recupere tous les membres de la collection Mongodb si aucun paramJSON est
+ * renseigne. Sinon recupere ceux correspondant aux criteres.
  */
-exports.findAllMembers = function(callback) {
-    db.collection(config.mongodb.collectionMembers).find({}, {_id:0}, function(err, cursor){
+exports.findAllMembers = function(callback, paramJSON) {
+    console.log(paramJSON);
+    paramJSON = (typeof paramJSON === 'undefined') ? {} : paramJSON;
+    db.collection(config.mongodb.collectionMembers).find(paramJSON, {_id:0}, function(err, cursor){
         cursor.sort({"id":1}).toArray(function(err, items) {
             callback(items);
-      });
+        });
     });
 };
