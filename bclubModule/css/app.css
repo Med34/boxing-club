@@ -19,3 +19,9 @@ body {
 .form-inline .form-control {
     width: 60%;
 }
+
+/* MAPS */
+#map #svg {
+    display: block;
+    margin: 0 auto;
+}

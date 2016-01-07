@@ -23,5 +23,30 @@ angular.module('bclub').controller("FindMemberController", function ($scope, $ht
 });
 
 angular.module('bclub').controller("LocalizeMemberController", function($scope, $http){
-    
+    var width= 500, height=550;
+    var path = d3.geo.path();
+
+    // On change la projection de la carte et on la centre sur la France.
+    var projection = d3.geo.conicConformal()
+        .center([2.454071, 46.279229])
+        .scale(3000)
+        .translate([width / 2, height / 2]);
+
+    path.projection(projection);
+
+    var svg = d3.select('#map').append("svg")
+        .attr("id", "svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    var deps = svg.append("g");
+
+    // Creation de la carte avec le support geojson
+    d3.json('vendor/regions.geojson', function(req, geojson) {
+        deps.selectAll("path")
+            .data(geojson.features)
+            .enter()
+            .append("path")
+            .attr("d", path);
+    });
 });
