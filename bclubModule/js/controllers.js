@@ -40,6 +40,9 @@ angular.module('bclub').controller("LocalizeMemberController", function($scope, 
         .attr("height", height);
 
     var deps = svg.append("g");
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     // Creation de la carte avec le support geojson
     d3.json('vendor/regions.geojson', function(req, geojson) {
@@ -47,6 +50,16 @@ angular.module('bclub').controller("LocalizeMemberController", function($scope, 
             .data(geojson.features)
             .enter()
             .append("path")
-            .attr("d", path);
+            .attr("d", path)
+            .on("mouseover", function(d) {
+                div.transition().duration(200).style("opacity", .9);
+                div.html("Région : " + d.properties.nom)
+                       .style("left", (d3.event.pageX + 30) + "px")
+                       .style("top", (d3.event.pageY - 30) + "px")
+            })
+            .on("mouseout", function(d) {
+                div.transition().duration(500).style("opacity", 0);
+                div.html("").style("left", "0px").style("top", "0px");
+            });
     });
 });
