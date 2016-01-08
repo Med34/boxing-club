@@ -68,6 +68,14 @@ angular.module('bclub').controller("LocalizeMemberController", function($scope, 
                 .on("mouseout", function(d) {
                     div.transition().duration(500).style("opacity", 0);
                     div.html("").style("left", "0px").style("top", "0px");
+                })
+                .attr("class", function(d){
+                    for (var i = 0; i < members.length; i++) {
+                        if (members[i].localization == d.properties.nom) {
+                            return "colorMap";
+                        }
+                    }
+                    return "basicMap";
                 });
         });
     });

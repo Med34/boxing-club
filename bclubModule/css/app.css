@@ -24,6 +24,15 @@ body {
 #map #svg {
     display: block;
     margin: 0 auto;
+    stroke: grey;
+    stroke-dasharray: 1;
+    stroke-linejoin: round;
+}
+#map #svg .colorMap {
+    fill: #d991d9;
+}
+#map #svg .basicMap {
+    fill: #c3c3c3;
 }
 
 /* Tooltip */
