@@ -44,22 +44,32 @@ angular.module('bclub').controller("LocalizeMemberController", function($scope, 
         .attr("class", "tooltip")
         .style("opacity", 0);
 
-    // Creation de la carte avec le support geojson
-    d3.json('vendor/regions.geojson', function(req, geojson) {
-        deps.selectAll("path")
-            .data(geojson.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-            .on("mouseover", function(d) {
-                div.transition().duration(200).style("opacity", .9);
-                div.html("Région : " + d.properties.nom)
-                       .style("left", (d3.event.pageX + 30) + "px")
-                       .style("top", (d3.event.pageY - 30) + "px")
-            })
-            .on("mouseout", function(d) {
-                div.transition().duration(500).style("opacity", 0);
-                div.html("").style("left", "0px").style("top", "0px");
-            });
+    $http.get("http://localhost:8888/listMembers").then(function (response) {
+        var members = response.data;
+        // Creation de la carte avec le support geojson
+        d3.json('vendor/regions.geojson', function(req, geojson) {
+            deps.selectAll("path")
+                .data(geojson.features)
+                .enter()
+                .append("path")
+                .attr("d", path)
+                .on("mouseover", function(d) {
+                    div.transition().duration(200).style("opacity", .9);
+                    var chaineAffichage = "";
+                    for (var i = 0; i < members.length; i++) {
+                        if (members[i].localization == d.properties.nom) {
+                            chaineAffichage+= members[i].fname + " " + members[i].name+"<br/>";
+                        }
+                    }
+                    div.html("Région : " + d.properties.nom + "<br/>" + chaineAffichage)
+                           .style("left", (d3.event.pageX + 30) + "px")
+                           .style("top", (d3.event.pageY - 30) + "px")
+                })
+                .on("mouseout", function(d) {
+                    div.transition().duration(500).style("opacity", 0);
+                    div.html("").style("left", "0px").style("top", "0px");
+                });
+        });
     });
+
 });
