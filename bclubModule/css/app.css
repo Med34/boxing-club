@@ -20,6 +20,15 @@ body {
     width: 60%;
 }
 
+/* RESULT TABLE */
+#findMemberTable {
+    margin-top: 70px;
+}
+
+#findMemberTable th, #findMemberTable tr, #findMemberTable td {
+    text-align: center;
+}
+
 /* MAPS */
 #map #svg {
     display: block;
@@ -35,7 +44,7 @@ body {
     fill: #c3c3c3;
 }
 
-/* Tooltip */
+/* TOOLTIP */
 div.tooltip {
     position: absolute;
     text-align: center;
