@@ -1,27 +1,32 @@
 [
   {
     "id": 0,
-    "integer": 7,
-    "mail": "jeaninesantana@rodeocean.com"
+    "nom": "Titoun",
+    "mail": "jeaninesantana@rodeocean.com",
+    "localization": "Languedoc-Roussillon"
   },
   {
     "id": 1,
-    "integer": 1,
-    "mail": "dianepayne@bedlam.com"
+    "nom": "Durand",
+    "mail": "dianepayne@bedlam.com",
+    "localization": "Bourgogne"
   },
   {
     "id": 2,
-    "integer": 4,
-    "mail": "joynerdaniels@zipak.com"
+    "nom": "Truc",
+    "mail": "joynerdaniels@zipak.com",
+    "localization": "Bretagne"
   },
   {
     "id": 3,
-    "integer": 10,
-    "mail": "medinachambers@songbird.com"
+    "nom": "Dupond",
+    "mail": "medinachambers@songbird.com",
+    "localization": "Alsace"
   },
   {
     "id": 4,
-    "integer": 4,
-    "mail": "lancasterarnold@medalert.com"
+    "nom": "Lama",
+    "mail": "lancasterarnold@medalert.com",
+    "localization": "Bourgogne"
   }
 ]
