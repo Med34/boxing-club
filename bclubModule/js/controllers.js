@@ -54,14 +54,14 @@ angular.module('bclub').controller("LocalizeMemberController", function($scope, 
                 .append("path")
                 .attr("d", path)
                 .on("mouseover", function(d) {
-                    div.transition().duration(200).style("opacity", .9);
+                    div.transition().duration(200).style("opacity", 0.9);
                     var chaineAffichage = "";
                     for (var i = 0; i < members.length; i++) {
                         if (members[i].localization == d.properties.nom) {
                             chaineAffichage+= members[i].fname + " " + members[i].name+"<br/>";
                         }
                     }
-                    div.html("Région : " + d.properties.nom + "<br/>" + chaineAffichage)
+                    div.html("<span class='region'>Région : " + d.properties.nom + "</span><br/>" + chaineAffichage)
                            .style("left", (d3.event.pageX + 30) + "px")
                            .style("top", (d3.event.pageY - 30) + "px")
                 })
