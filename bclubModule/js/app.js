@@ -15,6 +15,10 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: 'LocalizeMemberController',
             templateUrl: 'templates/localizeMembers.html'
         })
+        .when('/display3D', {
+            controller: '3DController',
+            templateUrl: 'templates/display3D.html'
+        })
         .otherwise({
             redirectTo: '/home'
         });

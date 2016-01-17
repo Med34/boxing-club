@@ -11,6 +11,6 @@ config.mongodb.url = "mongodb://localhost:27017/BoxingClub";
 config.mongodb.collectionMembers = "members";
 
 // BDD locale.
-config.local.json = "datas/test.json";
+config.local.json = "datas/boxers.min.json";
 
 module.exports = config;
