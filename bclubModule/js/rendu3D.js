@@ -1,12 +1,12 @@
 var Rendu3D = function() {
-    this.idDiv = "roomTest"
+    this.idDiv = "display3D"
     this.scene;
     this.renderer;
     this.camera;
     this.ground;
     this.initCamera = function() {
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(0, 100, 200);
+        this.camera.position.set(0, 75, 200);
     };
     this.initScene = function() {
         this.scene = new THREE.Scene();
@@ -26,7 +26,7 @@ var Rendu3D = function() {
     this.createRender = function() {
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setClearColor( 0xFFFFFF, 1);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
         document.getElementById(this.idDiv).appendChild(this.renderer.domElement);
     };
     this.animate = function() {

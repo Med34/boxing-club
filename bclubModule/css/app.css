@@ -63,3 +63,9 @@ div.tooltip .region {
     font-weight: bold;
     color: blue;
 }
+
+/* DISPLAY 3D */
+#display3D canvas {
+    margin: 0 auto;
+    display: block;
+}
