@@ -83,5 +83,7 @@ angular.module('bclub').controller("LocalizeMemberController", function($scope, 
 });
 
 angular.module("bclub").controller("3DController", function($scope, $http){
-    console.log("3DController");
+    var rendu = new Rendu3D();
+    rendu.getRendu();
+    rendu.animate();
 });
