@@ -7,9 +7,24 @@ var Rendu3D = function() {
     this.walls = [];
     this.meshGround = new THREE.Object3D();
     this.meshWalls = new THREE.Object3D();
+    this.dright = false;
+    this.dleft = false;
+    this.dforward = false;
+    this.dbackward = false;
+    this.camup;
+    this.camat;
+    this.camright;
+    this.rotation = 0;
+    this.height = 300;
+    this.width = 500;
+
     this.initCamera = function() {
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(0, 75, 200);
+        this.camera.position.set(0, 75, 275);
+        this.camright = new THREE.Vector3();
+        this.camup = new THREE.Vector3();
+        this.camat = new THREE.Vector3();
+        this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
     };
     this.initScene = function() {
         this.scene = new THREE.Scene();
@@ -17,42 +32,121 @@ var Rendu3D = function() {
         this.scene.add(this.meshWalls);
     };
     this.addGround = function() {
-        var ground = new THREE.PlaneGeometry(512, 1024);
-        var material = new THREE.MeshBasicMaterial({color: 0xFF0000});
-        this.ground = new THREE.Mesh(ground, material);
+        var ground = new THREE.PlaneGeometry(this.width, this.height);
+        var groundTexture = new THREE.TextureLoader().load("images/stone-ground.png");
+        groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
+        var groundMaterial = new THREE.MeshBasicMaterial({
+            map: groundTexture,
+            overdraw: 0.5
+        });
+        this.ground = new THREE.Mesh(ground, groundMaterial);
         this.ground.rotation.x = -Math.PI / 2;
         this.meshGround.add(this.ground);
     };
     this.addWalls = function() {
-        var material = new THREE.MeshBasicMaterial({color: 0xFF0000});
+        var wallTextures = new THREE.TextureLoader().load("images/bricks.jpg");
+        wallTextures.wrapS = wallTextures.wrapT = THREE.RepeatWrapping;
+        var wallMaterial = new THREE.MeshBasicMaterial({
+            map: wallTextures,
+            overdraw: 0.5
+        });
         var walls = [
-            new THREE.PlaneGeometry(this.ground.height, 128),
-            new THREE.PlaneGeometry(this.ground.width, 128),
-            new THREE.PlaneGeometry(this.ground.height, 128),
-            new THREE.PlaneGeometry(this.ground.width, 128)
+            new THREE.PlaneGeometry(this.height, 128),
+            new THREE.PlaneGeometry(this.width, 128),
+            new THREE.PlaneGeometry(this.height, 128),
+            new THREE.PlaneGeometry(this.width, 128)
         ];
         for (var i = 0; i < walls.length; i += 1) {
-            this.walls[i] = new THREE.Mesh(walls[i], material);
+            this.walls[i] = new THREE.Mesh(walls[i], wallMaterial);
             this.walls[i].position.y = 128 / 2;
             this.meshWalls.add(this.walls[i]);
         }
         this.walls[0].rotation.y = -Math.PI / 2;
-        this.walls[0].position.x = this.ground.width / 2;
+        this.walls[0].position.x = this.width / 2;
         this.walls[1].rotation.y = Math.PI;
-        this.walls[1].position.z = this.ground.height / 2;
+        this.walls[1].position.z = this.height / 2;
         this.walls[2].rotation.y = Math.PI / 2;
-        this.walls[2].position.x = -this.ground.width / 2;
-        this.walls[3].position.z = -this.ground.height / 2;
+        this.walls[2].position.x = -this.width / 2;
+        this.walls[3].position.z = -this.height / 2;
     };
     this.createRender = function() {
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setClearColor( 0xFFFFFF, 1);
         this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
         document.getElementById(this.idDiv).appendChild(this.renderer.domElement);
+        window.addEventListener("keydown", this.onKeyDown, false);
+        window.addEventListener("keyup", this.onKeyUp, false);
+        window.addEventListener("mousemove", this.onMouseMove, false);
+    };
+    this.onKeyDown = function(e) {
+        switch(e.keyCode) {
+            case 37: // Left
+                this.dleft = true;
+            break;
+            case 38: // Up
+                this.dforward = true;
+            break;
+            case 39: // Right
+                this.dright = true;
+            break;
+            case 40: // Down
+                this.dbackward = true;
+            break;
+        }
+    };
+    this.onKeyUp = function(e) {
+        switch(e.keyCode) {
+            case 37: // Left
+                this.dleft = false;
+            break;
+            case 38: // Up
+                this.dforward = false;
+            break;
+            case 39: // Right
+                this.dright = false;
+            break;
+            case 40: // Down
+                this.dbackward = false;
+            break;
+        }
+    }
+    this.onMouseMove = function(event) {
+        var box = {};
+        box.minX = Math.abs(window.innerWidth - 400) / 2;
+        box.maxX = box.minX + 400;
+
+        if(event.clientX < box.minX) {
+            this.rotation = Math.min(0.1, 0.0001 * (box.minX - event.clientX));
+        }
+        else if(event.clientX > box.maxX) {
+            this.rotation = Math.max(-0.1, -0.0001 * (event.clientX - box.maxX));
+        }
+        else {
+            this.rotation = 0;
+        }
     };
     this.animate = function() {
         var that = this;
         requestAnimationFrame( function() { that.animate(); } );
+        this.camera.rotation.y += this.rotation;
+        this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
+        if(this.dforward) {
+            this.camera.position.add(this.camat.multiplyScalar(-5));
+            this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
+        }
+        if(this.dbackward) {
+            this.camera.position.add(this.camat.multiplyScalar(5));
+            this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
+        }
+        if(this.dleft) {
+            this.camera.position.add(this.camright.multiplyScalar(-5));
+            this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
+        }
+        if(this.dright) {
+            this.camera.position.add(this.camright.multiplyScalar(5));
+            this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
+        }
+
         that.renderer.render(this.scene, this.camera);
     };
     this.getRendu = function() {
