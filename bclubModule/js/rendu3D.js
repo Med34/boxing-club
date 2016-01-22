@@ -7,23 +7,21 @@ var Rendu3D = function() {
     this.walls = [];
     this.meshGround = new THREE.Object3D();
     this.meshWalls = new THREE.Object3D();
-    this.dright = false;
-    this.dleft = false;
-    this.dforward = false;
-    this.dbackward = false;
-    this.camup;
-    this.camat;
-    this.camright;
+    this.directions = {};
+    this.directions.forward = false;
+    this.directions.backward = false;
+    this.directions.left = false;
+    this.directions.right = false;
+    this.camright = new THREE.Vector3();
+    this.camup = new THREE.Vector3();
+    this.camat = new THREE.Vector3();
     this.rotation = 0;
     this.height = 300;
     this.width = 500;
 
     this.initCamera = function() {
         this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
-        this.camera.position.set(0, 75, 275);
-        this.camright = new THREE.Vector3();
-        this.camup = new THREE.Vector3();
-        this.camat = new THREE.Vector3();
+        this.camera.position.set(0, 75, 200);
         this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
     };
     this.initScene = function() {
@@ -74,39 +72,36 @@ var Rendu3D = function() {
         this.renderer.setClearColor( 0xFFFFFF, 1);
         this.renderer.setSize(window.innerWidth * 0.8, window.innerHeight * 0.8);
         document.getElementById(this.idDiv).appendChild(this.renderer.domElement);
-        window.addEventListener("keydown", this.onKeyDown, false);
-        window.addEventListener("keyup", this.onKeyUp, false);
-        window.addEventListener("mousemove", this.onMouseMove, false);
     };
     this.onKeyDown = function(e) {
         switch(e.keyCode) {
             case 37: // Left
-                this.dleft = true;
+                this.directions.left = true;
             break;
             case 38: // Up
-                this.dforward = true;
+                this.directions.forward = true;
             break;
             case 39: // Right
-                this.dright = true;
+                this.directions.right = true;
             break;
             case 40: // Down
-                this.dbackward = true;
+                this.directions.backward = true;
             break;
         }
     };
     this.onKeyUp = function(e) {
         switch(e.keyCode) {
             case 37: // Left
-                this.dleft = false;
+                this.directions.left = false;
             break;
             case 38: // Up
-                this.dforward = false;
+                this.directions.forward = false;
             break;
             case 39: // Right
-                this.dright = false;
+                this.directions.right = false;
             break;
             case 40: // Down
-                this.dbackward = false;
+                this.directions.backward = false;
             break;
         }
     }
@@ -130,19 +125,19 @@ var Rendu3D = function() {
         requestAnimationFrame( function() { that.animate(); } );
         this.camera.rotation.y += this.rotation;
         this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
-        if(this.dforward) {
+        if(this.directions.forward) {
             this.camera.position.add(this.camat.multiplyScalar(-5));
             this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
         }
-        if(this.dbackward) {
+        if(this.directions.backward) {
             this.camera.position.add(this.camat.multiplyScalar(5));
             this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
         }
-        if(this.dleft) {
+        if(this.directions.left) {
             this.camera.position.add(this.camright.multiplyScalar(-5));
             this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
         }
-        if(this.dright) {
+        if(this.directions.right) {
             this.camera.position.add(this.camright.multiplyScalar(5));
             this.camera.matrix.extractBasis(this.camright, this.camup, this.camat);
         }

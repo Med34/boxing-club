@@ -86,4 +86,15 @@ angular.module("bclub").controller("3DController", function($scope, $http){
     var rendu = new Rendu3D();
     rendu.getRendu();
     rendu.animate();
+
+    // Obligations d'ajouter les listeners en dehors du prototype.
+    window.addEventListener("keydown", function(e){
+        rendu.onKeyDown(e);
+    }, false);
+    window.addEventListener("keyup", function(e) {
+        rendu.onKeyUp(e);
+    }, false);
+    window.addEventListener("mousemove", function(e) {
+        rendu.onMouseMove(e);
+    }, false);
 });
